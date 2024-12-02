@@ -4,7 +4,7 @@ FROM alpine/curl:${VERSION}
 
 USER root
 
-RUN apk add gettext libintl wait4x bash
+RUN apk add gettext libintl jq wait4x bash
 
 # Set bash as the default shell
 SHELL ["/bin/bash", "-c"]
