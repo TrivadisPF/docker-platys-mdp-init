@@ -34,7 +34,7 @@ fi
 
 # Prepare the curl command dynamically based on the method
 if [ "$method" == "GET" ]; then
-  curl -X GET -H "Authorization: Bearer $token" --insecure -k $nifiBaseUrl/nifi-api/$resource
+  curl -X GET -H "Authorization: Bearer $token" --insecure -s -k $nifiBaseUrl/nifi-api/$resource
 else
   dataFile=$6
   if [ -z "$dataFile" ]; then
@@ -49,5 +49,5 @@ else
   fi
 
   envsubst < $dataFile > temp.json
-  curl -X $method -H "Authorization: Bearer $token" -H "Content-Type: application/json" -q -d @temp.json --insecure -k $nifiBaseUrl/nifi-api/$resource
+  curl -X $method -H "Authorization: Bearer $token" -H "Content-Type: application/json" -d @temp.json --insecure -s -k $nifiBaseUrl/nifi-api/$resource
 fi
