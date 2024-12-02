@@ -49,5 +49,5 @@ else
   fi
 
   envsubst < $dataFile > temp.json
-  curl -X $method -H "Authorization: Bearer $token" -H "Content-Type: application/json" -d @temp.json --insecure -k $nifiBaseUrl/nifi-api/$resource
+  curl -X $method -H "Authorization: Bearer $token" -H "Content-Type: application/json" -q -d @temp.json --insecure -k $nifiBaseUrl/nifi-api/$resource
 fi
