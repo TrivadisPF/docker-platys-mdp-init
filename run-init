@@ -14,29 +14,33 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Run the init-solr-home script and source any '.sh' scripts in
-# /docker-entrypoint-initdb.d.
-# This script is sourced by some of the solr-* commands, so that
-# you can run eg:
-#
-#   mkdir initdb; echo "echo hi" > initdb/hi.sh
-#   docker run -v $PWD/initdb:/docker-entrypoint-initdb.d solr
-#
-# and have your script execute before Solr starts.
-#
-# Note: scripts can modify the environment, which will affect
-# subsequent scripts and ultimately Solr. That allows you to set
-# environment variables from your scripts (though you usually just
-# use "docker run -e"). If this is undesirable in your use-case,
-# have your scripts execute a sub-shell.
+# Sources any '.sh' scripts in /docker-entrypoint-init.d. A script is only run once, even if the docker container is restarted / rerun. 
+# The status is stored by marker files held in /var/run/markers.
 
 set -e
 
-# execute files in /docker-entrypoint-init.d before starting solr
+# Directory to store marker files
+MARKER_DIR="/var/run/markers"
+mkdir -p "$MARKER_DIR"
+
 while read -r f; do
     case "$f" in
-        *.sh)     echo "$0: running $f"; . "$f" ;;
-        *)        echo "$0: ignoring $f" ;;
+        *.sh)
+            marker_file="$MARKER_DIR/$(basename "$f").marker"
+            if [ -f "$marker_file" ]; then
+                echo "$0: skipping $f (already run)"
+            else
+                echo "$0: running $f"
+                if . "$f"; then
+                    touch "$marker_file"
+                else
+                    echo "$0: error running $f"
+                fi
+            fi
+            ;;
+        *)
+            echo "$0: ignoring $f"
+            ;;
     esac
     echo
 done < <(find /docker-entrypoint-init.d/ -mindepth 1 -type f | sort -n)

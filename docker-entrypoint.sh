@@ -22,16 +22,8 @@ if [[ "$VERBOSE" == "yes" ]]; then
     set -x
 fi
 
-# Check for a marker file indicating the service has already run
-if [ -f "/tmp/service_ran.marker" ]; then
-  echo "NiFi Init has already run. Exiting."
-  exit 0
-fi
-
+# run all the shell scripts in the init folder once
 source run-init
-
-# Mark the service as run
-touch /tmp/service_ran.marker
 
 # execute command passed in as arguments.
 exec "$@"
