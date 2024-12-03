@@ -22,8 +22,6 @@ if [[ "$VERBOSE" == "yes" ]]; then
     set -x
 fi
 
-wait4x http $NIFI_URL/nifi-api --insecure-skip-tls-verify
-
 # Check for a marker file indicating the service has already run
 if [ -f "/tmp/service_ran.marker" ]; then
   echo "NiFi Init has already run. Exiting."
