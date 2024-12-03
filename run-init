@@ -38,6 +38,8 @@ while read -r f; do
                 fi
             fi
             ;;
+        *.json)
+            ;;
         *)
             echo "$0: ignoring $f"
             ;;
