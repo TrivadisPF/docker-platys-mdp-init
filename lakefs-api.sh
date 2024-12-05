@@ -24,11 +24,15 @@ if [[ "$method" != "POST" && "$method" != "PUT" && "$method" != "GET" ]]; then
 fi
 
 # base64 encode accessKeyId and secretAccessKey
-credentials=$(echo "$accessKeyId:$secretAccessKey" | base64 -w 0)
+basicAuth=$(echo "$accessKeyId:$secretAccessKey" | base64 -w 0)
+
+# Get the authentication token
+tokenAuth=$(curl -k $vaultBaseUrl/api/v1/auth/login --data  "{ \"access_key_id\": \"$username\", \"secret_access_key\": \"$password\" }" --insecure --silent | jq -r .token)
+
 
 # Prepare the curl command dynamically based on the method
 if [ "$method" == "GET" ]; then
-  curl -X GET -H "Authorization: Basic $credentials" -H "Content-Type: application/json" --insecure -k $lakeFSBaseUrl/api/v1/$resource
+  curl -X GET -H "Authorization: Bearer $tokenAuth" -H "Content-Type: application/json" --insecure -k $lakeFSBaseUrl/api/v1/$resource
 else
   dataFile=$6
   if [ -z "$dataFile" ]; then
@@ -43,5 +47,5 @@ else
   fi
 
   envsubst < $dataFile > /tmp/temp.json
-  curl -X $method -H "Authorization: Basic $credentials" -H "Content-Type: application/json" -d @/tmp/temp.json --insecure --silent -k $lakeFSBaseUrl/api/v1/$resource
+  curl -X $method -H "Authorization: Bearer $tokenAuth" -H "Content-Type: application/json" -d @/tmp/temp.json --insecure --silent -k $lakeFSBaseUrl/api/v1/$resource
 fi
