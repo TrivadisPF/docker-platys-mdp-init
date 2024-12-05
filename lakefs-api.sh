@@ -32,9 +32,12 @@ fi
 #  exit 1
 #fi
 
+# base64 encode accessKeyId and secretAccessKey
+credentials=$(echo "$accessKeyId:$secretAccessKey" | base64 -w 0)
+
 # Prepare the curl command dynamically based on the method
 if [ "$method" == "GET" ]; then
-  curl -X GET -u "$accessKeyId:$secretAccessKey" -H "Content-Type: application/json" --insecure -k $lakeFSBaseUrl/api/v1/$resource
+  curl -X GET -H "Authorization: Basic $credential" -H "Content-Type: application/json" --insecure -k $lakeFSBaseUrl/api/v1/$resource
 else
   dataFile=$6
   if [ -z "$dataFile" ]; then
@@ -49,5 +52,5 @@ else
   fi
 
   envsubst < $dataFile > /tmp/temp.json
-  curl -X $method -u "$accessKeyId:$secretAccessKey" -H "Content-Type: application/json" -d @/tmp/temp.json --insecure --silent -k $lakeFSBaseUrl/api/v1/$resource
+  curl -X $method -H "Authorization: Basic $credential" -H "Content-Type: application/json" -d @/tmp/temp.json --insecure --silent -k $lakeFSBaseUrl/api/v1/$resource
 fi
