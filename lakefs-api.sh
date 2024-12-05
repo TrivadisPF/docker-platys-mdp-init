@@ -23,9 +23,8 @@ if [[ "$method" != "POST" && "$method" != "PUT" && "$method" != "GET" ]]; then
   exit 1
 fi
 
-# Get the authentication token
+# Get the authentication token (is not needed, authentication can be done directly in the GET / PUT / POST)
 #token=$(curl -k $lakeFSBaseUrl/api/v1/auth/login -H "Content-Type: application/json" --data  "{\"access_key_id\": \"$accessKeyId\", \"secret_access_key\": \"$secretAccessKey\"}" --insecure --silent | jq -r .token)
-#authBase64=$(echo -n "$accessKeyId:$secretAccessKey" | base64)
 
 # Check if token retrieval was successful
 #if [ -z "$token" ]; then
