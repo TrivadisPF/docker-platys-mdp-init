@@ -33,8 +33,8 @@ if [ -z "$token" ]; then
 fi
 
 # Prepare the curl command dynamically based on the method
-if [ "$method" == "GET" || "$method" == "DELETE" ]; then
-  curl -X GET -H "Authorization: Bearer $token" --insecure --silent -k $nifiBaseUrl/nifi-api/$resource
+if [ "$method" == "GET" ] || [ "$method" == "DELETE" ]; then
+  curl -X $method -H "Authorization: Bearer $token" --insecure --silent -k $nifiBaseUrl/nifi-api/$resource
 else
   dataFile=$6
   if [ -z "$dataFile" ]; then
