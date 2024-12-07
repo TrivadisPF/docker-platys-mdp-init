@@ -18,8 +18,8 @@ method=$4
 resource=$5
 
 # Validate the HTTP method
-if [[ "$method" != "POST" && "$method" != "PUT" && "$method" != "GET" ]]; then
-  echo "Error: Invalid method. Allowed methods are POST, PUT, or GET."
+if [[ "$method" != "POST" && "$method" != "PUT" && "$method" != "DELETE" && "$method" != "GET" ]]; then
+  echo "Error: Invalid method. Allowed methods are POST, PUT, DELETE or GET."
   exit 1
 fi
 
@@ -33,7 +33,7 @@ if [ -z "$token" ]; then
 fi
 
 # Prepare the curl command dynamically based on the method
-if [ "$method" == "GET" ]; then
+if [ "$method" == "GET" || "$method" == "DELETE" ]; then
   curl -X GET -H "Authorization: Bearer $token" --insecure --silent -k $nifiBaseUrl/nifi-api/$resource
 else
   dataFile=$6
