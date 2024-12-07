@@ -9,7 +9,7 @@ ENV NIFI_TOOLKIT_VERSION=2.0.0
 ENV NIFI_TOOLKIT_HOME=/opt/nifi-toolkit
 
 # install envsubst, jq, wait4x, bash shell, minio-mc
-RUN apk add --no-cache gettext libintl jq wait4x bash openjdk11 && \
+RUN apk add --no-cache gettext libintl jq wait4x bash openjdk21 && \
     arch=$(uname -m) && \
     if [ "$arch" = "aarch64" ]; then \
         mc_url="https://dl.min.io/client/mc/release/linux-arm64/mc"; \
