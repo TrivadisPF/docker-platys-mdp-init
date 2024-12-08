@@ -23,7 +23,7 @@ if [[ "$VERBOSE" == "yes" ]]; then
 fi
 
 if [[ -v NIFI2_URL && -n "$NIFI2_URL" ]]; then
-    /app/create-nifi-toolkit-properties.sh /opt/nifi/conf/
+    /app/create-nifi-toolkit-properties.sh /opt/nifi/conf
 fi
 
 
