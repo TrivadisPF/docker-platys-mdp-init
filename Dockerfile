@@ -23,7 +23,8 @@ RUN apk add --no-cache gettext libintl jq wait4x bash openjdk21 && \
     mv /opt/nifi-toolkit-${NIFI_TOOLKIT_VERSION} ${NIFI_TOOLKIT_HOME} && \
     rm /tmp/nifi-toolkit.zip
 
-ENV PATH=$PATH:/root/minio-binaries:${NIFI_TOOLKIT_HOME}/bin
+ENV JAVA_HOME=/usr/lib/jvm/java-21-openjdk
+ENV PATH=$PATH:/root/minio-binaries:${NIFI_TOOLKIT_HOME}/bin:${JAVA_HOME}/bin
 
 # Create an alias for nifi-toolkit to cli.sh
 RUN echo "alias nifi-toolkit='cli.sh'" >> /$USER/.bash_profile
