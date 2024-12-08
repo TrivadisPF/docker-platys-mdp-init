@@ -5,7 +5,7 @@ if [ $# -lt 5 ]
 then
   echo "Usage: nifi-api <nifiBaseUrl> <username> <password> <method> <resource>"
   echo "       nifiBaseUrl: the base URL of the NiFi server as http(s)://<host:port>"
-  echo "       method: POST | PUT | GET"
+  echo "       method: POST | PUT | GET | DELETE"
   echo "       resource: the resource to invoke, do not prefix it with /"
   exit 1
 fi
