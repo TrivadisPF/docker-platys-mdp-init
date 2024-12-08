@@ -27,7 +27,7 @@ ENV JAVA_HOME=/usr/lib/jvm/java-21-openjdk
 ENV PATH=$PATH:/root/minio-binaries:${NIFI_TOOLKIT_HOME}/bin:${JAVA_HOME}/bin
 
 # Create an alias for nifi-toolkit to cli.sh
-RUN echo "alias nifi-toolkit='cli.sh'" >> /root/.bash_profile
+RUN echo "alias nifi-toolkit='cli.sh'" >> /root/.bashrc
 
 # Set bash as the default shell
 SHELL ["/bin/bash", "-c"]
