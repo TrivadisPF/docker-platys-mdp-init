@@ -21,6 +21,7 @@ RUN apk add --no-cache gettext libintl jq wait4x bash openjdk21 && \
     wget https://archive.apache.org/dist/nifi/${NIFI_TOOLKIT_VERSION}/nifi-toolkit-${NIFI_TOOLKIT_VERSION}-bin.zip -O /tmp/nifi-toolkit.zip && \
     unzip /tmp/nifi-toolkit.zip -d /opt && \
     mv /opt/nifi-toolkit-${NIFI_TOOLKIT_VERSION} ${NIFI_TOOLKIT_HOME} && \
+    cp ${NIFI_TOOLKIT_HOME}/bin/cli.sh ${NIFI_TOOLKIT_HOME}/bin/nifi-toolkit.sh && \
     rm /tmp/nifi-toolkit.zip
 
 ENV JAVA_HOME=/usr/lib/jvm/java-21-openjdk
