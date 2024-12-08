@@ -29,6 +29,9 @@ if [[ -v NIFI2_URL && -n "$NIFI2_URL" ]]; then
     /app/create-nifi-toolkit-properties.sh /opt/nifi/conf
 
     cli.sh session set nifi.props /opt/nifi/conf/nifi-toolkit.properties
+    
+    # lets use an alias for cli.sh 
+    alias nifi-toolkit='cli.sh'
 fi
 
 # run all the shell scripts in the init folder once
