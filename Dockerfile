@@ -26,7 +26,7 @@ RUN apk add --no-cache gettext libintl jq wait4x bash openjdk21 && \
 ENV PATH=$PATH:/root/minio-binaries:${NIFI_TOOLKIT_HOME}/bin
 
 # Create an alias for nifi-toolkit to cli.sh
-RUN echo "alias nifi-toolkit='cli.sh'" >> /etc/profile
+RUN echo "alias nifi-toolkit='cli.sh'" >> /$USER/.bash_profile
 
 # Set bash as the default shell
 SHELL ["/bin/bash", "-c"]
