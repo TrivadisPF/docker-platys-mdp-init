@@ -22,6 +22,11 @@ if [[ "$VERBOSE" == "yes" ]]; then
     set -x
 fi
 
+if [[ -v NIFI2_URL -n "$NIFI2_URL" ]]; then
+    /app/create-nifi-toolkit-properties.sh /opt/nifi/conf/
+fi
+
+
 # run all the shell scripts in the init folder once
 source run-init
 
