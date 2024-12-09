@@ -18,7 +18,7 @@ method=$4
 resource=$5
 
 # Validate the HTTP method
-if [[ "$method" != "POST" && "$method" != "PUT" && "$method" != "DELETE" && "$method" != "GET" && "$method" != "PATCH"]]; then
+if [[ "$method" != "POST" && "$method" != "PUT" && "$method" != "DELETE" && "$method" != "GET" && "$method" != "PATCH" ]]; then
   echo "Error: Invalid method. Allowed methods are POST, PUT, DELETE, GET or PATCH."
   exit 1
 fi
