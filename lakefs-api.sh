@@ -27,7 +27,7 @@ fi
 basicAuth=$(echo "$accessKeyId:$secretAccessKey" | base64 -w 0)
 
 # Get the authentication token
-tokenAuth = ""
+tokenAuth=""
 if [[ -v accessKeyId && -n "$accessKeyId" ]]; then
   tokenAuth=$(curl -H "Content-Type: application/json" -k $lakeFSBaseUrl/api/v1/auth/login --data  "{ \"access_key_id\": \"$accessKeyId\", \"secret_access_key\": \"$secretAccessKey\" }" --insecure --silent | jq -r .token)
 fi
