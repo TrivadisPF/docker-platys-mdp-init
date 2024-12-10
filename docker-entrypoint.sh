@@ -22,6 +22,7 @@ if [[ "$VERBOSE" == "yes" ]]; then
     set -x
 fi
 
+# if the NIFI2_URL is set
 if [[ -v NIFI2_URL && -n "$NIFI2_URL" ]]; then
     # We have to wait for NiFi to become available so that the nifi.properties file is properly initialized!
     wait4x http $NIFI2_URL/nifi-api --insecure-skip-tls-verify --timeout 400s --interval 5s
