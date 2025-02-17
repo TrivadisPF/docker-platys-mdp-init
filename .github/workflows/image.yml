@@ -47,4 +47,4 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           build-args: |
-            NIFI_TOOLKIT_VERSION=2.0.0          
+            NIFI_TOOLKIT_VERSION=2.2.0          
