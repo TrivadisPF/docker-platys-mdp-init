@@ -5,7 +5,7 @@ FROM alpine/curl:${VERSION}
 USER root
 
 # Set environment variables
-ENV NIFI_TOOLKIT_VERSION=2.0.0
+ARG NIFI_TOOLKIT_VERSION=2.0.0
 ENV NIFI_TOOLKIT_HOME=/opt/nifi-toolkit
 
 # install envsubst, jq, wait4x, bash shell, minio-mc
